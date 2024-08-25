@@ -20,17 +20,17 @@
 
 function solution(k, m, score) {
     var answer = 0;
-    let cnt = 0; 
+    let cnt = 0;
     let arr = [];
-    
-    let sorted_score = score.sort((a,b) => b - a);
-    
+
+    let sorted_score = score.sort((a, b) => b - a);
+
     for (let i = 0; i < sorted_score.length; i++) {
         if (cnt === m) {
             const minimum = Math.min(...arr);
             const price = minimum * cnt;
             answer += price
-          
+
             arr = []; //배열 및 카운트 초기화
             cnt = 0;
         }
@@ -38,17 +38,28 @@ function solution(k, m, score) {
         cnt += 1
     }
 
-     if (cnt === m) {
-            const minimum = Math.min(...arr);
-            const price = minimum * cnt;
-            answer += price
-          
-            
-            arr = [];
-            cnt = 0;
-        } //반복문이 종료되고 마지막에 계산해야 하는 경우 대비
-    
-    
+    if (cnt === m) {
+        const minimum = Math.min(...arr);
+        const price = minimum * cnt;
+        answer += price
+
+
+        arr = [];
+        cnt = 0;
+    } //반복문이 종료되고 마지막에 계산해야 하는 경우 대비
+
+
     return answer;
 }
 
+// function solution(k, m, score) {
+//     let answer = 0;
+
+//     let sorted_score = score.slice().sort((a, b) => a - b).slice(score.length % m);
+
+//     for (let i = 0; i < sorted_score.length; i += m) {
+//         answer += sorted_score[i] * m;
+//     }
+
+//     return answer;
+// } 증감식 이용, slice메서드를 통한 배열 자르기
