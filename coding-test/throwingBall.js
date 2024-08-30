@@ -15,4 +15,3 @@ function solution(numbers, k) {
     return answer;
 }
 
-//다른 풀이
