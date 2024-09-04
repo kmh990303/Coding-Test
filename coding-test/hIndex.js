@@ -11,29 +11,39 @@
 
 function solution(citations) {
     var answer = 0;
-
+    
     let max_h = -Infinity;
-
-    for (let i = 0; i < citations.length; i++) {
-        let standard = citations[i];
-        let up = 0;
-        let down = 0;
-        for (let j = 0; j < citations.length; j++) {
-            if (citations[j] <= standard) {
-                down += 1;
-            }
-            if (citations[j] >= standard) {
-                up += 1;
-            }
+    let hIdx = 0;
+    
+    let up = 0;
+    let down = 0;
+    
+    while(true) {
+        hIdx += 1;
+        up = 0;
+        down = 0;
+        for (let i = 0; i < citations.length; i++) {
+            if (hIdx <= citations[i]) {
+                up++;
+            } //h번 이상 인용
+            if (hIdx >= citations[i]) {
+                down++;
+            } //h번 이하 인용
         }
-
-        if (standard <= up && standard >= down) {
-            let hIdx = standard;
-            if (max_h < hIdx) {
-                max_h = hIdx;
-            }
+        console.log(up, down);
+        if (hIdx <= up && hIdx >= down) {
+            max_h = hIdx;
+            answer = max_h;
+        }
+        if (hIdx > up) {
+            break;
         }
     }
-
-    return max_h | answer;
-} //초기 풀이
+    
+    if (hIdx <= up && hIdx >= down) {
+        max_h = hIdx;
+        answer = max_h;
+    }
+    
+    return answer;
+}
