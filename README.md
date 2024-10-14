@@ -417,3 +417,9 @@
 ## 최소 힙 복습
 
 - sinkDown으로 swap 인덱스에 대한 갱신 작업 지속 수행 => swap === null ? elem : leftChild => 삼항조건식 사용
+
+## BFS (2606번.js)
+
+- 인접리스트에 인접 정점이 없으면 continue 시킴으로써 효율성을 높일 수 있음
+
+<hr>
