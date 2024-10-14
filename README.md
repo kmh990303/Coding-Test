@@ -402,6 +402,8 @@
 - 사용자의 입력을 받을 땐, 'fs' 모듈의 readFileSync 메서드를 활용 // readline을 이용할 수 있음
 - DFS는 스택, BFS는 큐를 이용
 
+<hr>
+
 ### 10/14
 
 ## 해시 복습
@@ -411,3 +413,7 @@
 ## 스택, 큐 복습
 
 - (differentNum.js) 자바스크립트에선 배열에서 -1인덱스 활용 불가하므로 length - 1 을 활용할 것
+
+## 최소 힙 복습
+
+- sinkDown으로 swap 인덱스에 대한 갱신 작업 지속 수행 => swap === null ? elem : leftChild => 삼항조건식 사용

@@ -103,4 +103,102 @@ class MinHeap {
     size() {
         return this.heap.length;
     }
-}
+} //복습 수행 => 배열로 구현 시 정렬에 O(nlogn) 을 지속적으로 수행하기에 비효율적
+
+// function solution (scoville, K) {
+//     const heap = new MinHeap(scoville);
+//     let cnt = 0;
+    
+//     while (heap.peek() < K) {
+//         if (heap.size() < 2) return -1;
+        
+//         const first = heap.pop();
+//         const second = heap.pop();
+        
+//         const scov = first + (second * 2);
+        
+//         heap.push(scov);
+    
+//         cnt++;
+//     }
+    
+//     return cnt;
+// }
+
+// class MinHeap {
+//     constructor (arr) {
+//         this.heap = [];
+//         arr.forEach((val) => this.push(val));
+//     }
+//     push(val) {
+//         this.heap.push(val);
+//         this.bubbleUp();
+//     }
+//     bubbleUp () {
+//         let idx = this.heap.length - 1;
+//         let last = this.heap[idx]; //마지막 요소의 인덱스와 값 저장
+        
+//         while (idx > 0) {
+//             let parentIdx = Math.floor((idx - 1) / 2);
+//             let parent = this.heap[parentIdx];
+            
+//             if (parent > last) {
+//                 this.heap[idx] = parent;
+//                 idx = parentIdx;
+//             } else {
+//                 break;
+//             }
+//         }
+        
+//         this.heap[idx] = last;
+//     }
+//     pop () {
+//         const removed = this.heap[0];
+//         const elem = this.heap.pop();
+        
+//         if (this.heap.length > 0) {
+//             this.heap[0] = elem;
+//             this.sinkDown(0);
+//         }
+        
+//         return removed;
+//     }
+//     sinkDown(index) {
+//         const length = this.heap.length;
+//         const elem = this.heap[index];
+        
+//         while (true) {
+//             let swap = null;
+//             let leftChildIdx = 2 * index + 1;
+//             let rightChildIdx = 2 * index + 2;
+            
+//             let leftChild = this.heap[leftChildIdx];
+//             let rightChild = this.heap[rightChildIdx];
+         
+//             if (leftChildIdx < length) {
+//                 if (leftChild < elem) swap = leftChildIdx;
+//             }   
+            
+//             if (rightChildIdx < length) {
+//                 if (rightChild < (swap === null ? elem : leftChild)) {
+//                     swap = rightChildIdx;
+//                 }
+//             }
+            
+//             if (swap === null) {
+//                 break;
+//             }
+            
+//             this.heap[index] = this.heap[swap];
+//             index = swap;
+//         }
+        
+//         this.heap[index] = elem;
+//     }
+//     peek () {
+//         return this.heap[0];
+//     }
+//     size () {
+//         return this.heap.length;
+//     }
+// }
