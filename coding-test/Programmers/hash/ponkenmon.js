@@ -36,3 +36,27 @@ function solution(nums) {
     return arr.length > max ? max : arr.length;
 }
 
+// function solution(nums) {
+//     const list = {};
+//     const N = nums.length;
+
+//     nums.forEach((num) => {
+//         if (!list[num]) {
+//             list[num] = 1;
+//         } else {
+//             list[num] += 1;
+//         }
+//     })
+
+//     let count = 0;
+
+//     for (let key in list) {
+//         count++;
+//     }
+
+//     if (count >= Math.floor(N / 2)) {
+//         return Math.floor(N / 2);
+//     } else {
+//         return count;
+//     }
+// } 복습
