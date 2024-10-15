@@ -32,3 +32,21 @@ function solution(sizes) {
 
     return maxWidth * maxHeight;
 }
+
+// function solution (sizes) {
+//     let result = 0;
+//     let maxW = -Infinity;
+//     let maxH = -Infinity;
+    
+//     sizes.forEach(([e1, e2]) => {
+//         const maxE = Math.max(e1, e2);
+//         const minE = Math.min(e1, e2);
+        
+//         if (maxW < maxE) maxW = maxE;
+//         if (maxH < minE) maxH = minE;
+//     });
+    
+//     result = maxW * maxH;
+    
+//     return result;
+// } // 복습
