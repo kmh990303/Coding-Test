@@ -42,3 +42,32 @@ function solution(n, lost, reserve) {
 
     return answer;
 }
+
+function solution(n, lost, reserve) {
+    let answer = n - lost.length;
+
+    let queue = reserve.slice();
+
+    lost = lost.filter((val) => {
+        if (queue.includes(val)) {
+            queue = queue.filter((v) => v !== val);
+            answer++;
+            return false;
+        } else {
+            return true;
+        }
+    }) //자기 자신이 도난 당하고 여벌이 있는 경우 처리
+
+    lost.sort((a, b) => a - b);
+    queue.sort((a, b) => a - b); //비교를 쉽게 하기 위해 정렬
+
+    lost.forEach((val) => {
+        const Idx = queue.findIndex((v) => Math.abs(val - v) === 1);
+        if (Idx !== -1) {
+            answer++;
+            queue.splice(Idx, 1);
+        }
+    })
+
+    return answer;
+}
