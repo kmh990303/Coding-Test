@@ -39,3 +39,29 @@ function solution(n, times) {
 
     return answer;
 }
+
+
+// function solution (n, times) {
+//     let answer = 0;
+//     let left = 1;
+//     let right = Math.max(...times) * n; // 시간의 범위로 탐색
+    
+//     while (left <= right) {
+//         let mid = Math.floor ((left + right) / 2);
+//         let proceedP = 0;
+        
+//         for (let time of times) {
+//             proceedP += Math.floor(mid / time);
+//             if (proceedP >= n) break;
+//         }
+        
+//         if (proceedP >= n) {
+//             answer = mid;
+//             right = mid - 1;
+//         } else {
+//             left = mid + 1;
+//         }
+//     }
+    
+//     return answer;
+// } 복습

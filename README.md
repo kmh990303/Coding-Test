@@ -456,3 +456,11 @@
 ### 2024.10.19
 
 ## dfs (targetNumber.js 복습)
+
+- dfs 탐색 복습
+
+<hr>
+
+### 2024.10.21
+
+## 이분 탐색 복습 (entryScreening.js 복습)
