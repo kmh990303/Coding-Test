@@ -76,3 +76,56 @@ class Graph {
         }
     }
 }
+
+
+
+// function solution (n, vertex) { 복습 dist 배열을 만들어 거리 값을 저장하도록 함 // 인접노드는 부모 노드의 거리값 + 1
+//     const graph = new Graph();
+//     let visited = Array(n + 1).fill(false);
+//     let dist = Array(n + 1).fill(0);
+
+    
+//     vertex.forEach(([v1, v2]) => {
+//         graph.addVertex(v1);
+//         graph.addVertex(v2);
+//         graph.addEdge(v1, v2);
+//     }) //그래프 초기화
+    
+    
+//     function bfs (start) {
+//         let queue = [start];
+//         visited[start] = true;
+        
+        
+//         while (queue.length > 0) {
+//             const elem = queue.shift();
+            
+//             graph.adjacencyList[elem].forEach((neighbor) => {
+//                 if (!visited[neighbor]) {
+//                     visited[neighbor] = true;
+//                     dist[neighbor] = dist[elem] + 1;
+//                     queue.push(neighbor);
+//                 }
+//             })
+//         }
+//     }
+    
+//     bfs(1);
+    
+//     const maxD = Math.max(...dist);
+    
+//     return dist.filter((val) => val === maxD).length;
+// }
+
+// class Graph {
+//     constructor() {
+//         this.adjacencyList = {};
+//     }
+//     addVertex(vertex) {
+//         if(!this.adjacencyList[vertex]) this.adjacencyList[vertex] = [];
+//     }
+//     addEdge(v1, v2) {
+//         this.adjacencyList[v1].push(v2);
+//         this.adjacencyList[v2].push(v1);
+//     }
+// }
