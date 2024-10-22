@@ -68,3 +68,24 @@ function solution(clothes) {
 
     return answer - 1;
 }
+
+
+// 복습
+
+function solution(clothes) {
+    const hash = {};
+    let answer = 1;
+
+    clothes.forEach(([name, category]) => {
+        if (!hash[category]) hash[category] = [];
+        hash[category].push(name);
+    })
+
+    console.log(hash);
+
+    for (let key in hash) {
+        answer *= hash[key].length + 1;
+    }
+
+    return answer - 1;
+}
