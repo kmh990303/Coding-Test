@@ -45,3 +45,44 @@ function solution(genres, plays) {
 
     return answer;
 }
+
+
+function solution (genres, plays) { // 복습
+    const hash_item = {}; // 장르별 음악 번호를 저장하는 용도
+    const hash_sum = {}; //장르별 총 횟수를 저장하는 용도
+    let arr = [];
+    let answer = [];
+    
+    for (let i = 0; i < genres.length; i++) {
+        const genre = genres[i];
+        const play = plays[i];
+        
+        if (!hash_item[genre]) hash_item[genre] = [];
+        if (!hash_sum[genre]) hash_sum[genre] = 0;
+        hash_item[genre].push([play, i]); //재생 횟수와 고유 번호를 저장
+        hash_sum[genre] += play;
+    }
+    
+    for (let key in hash_item) {
+        hash_item[key].sort((a, b) => b[0] - a[0]); //각 그룹 별로 재생횟수가 많은게 앞으로 옴
+    }
+    
+    for (let key in hash_sum) {
+        arr.push([key, hash_sum[key]]); //키 값과 대응되는 총 재생 횟수를 배열에 넣음
+    }
+    
+    arr.sort((a, b) => b[1] - a[1]); //총 재생횟수를 토대로 내림차순 정렬
+    
+    for (let [key, sum] of arr) {
+        if (hash_item[key].length > 1) {
+            const [p1, p2] = hash_item[key].slice(0, 2);
+            answer.push(p1[1], p2[1]);
+        } else {
+            answer.push(hash_item[key][0][1]);
+        }
+    }
+    
+    return answer;
+}
+
+// Object.keys(객체명) 하면 객체의 키 값을 모은 배열 반환 / reduce로 총합 구하는 것이 훨씬 편리
