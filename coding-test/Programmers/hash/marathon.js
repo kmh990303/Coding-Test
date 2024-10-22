@@ -40,3 +40,26 @@ function solution(participant, completion) {
         if (popped !== completion.pop()) return popped;
     }
 } // 다른 풀이
+
+
+function solution(participant, completion) { // 복습
+    let hash = {};
+
+    participant.forEach((person) => {
+        if (!hash[person]) {
+            hash[person] = 1;
+        } else {
+            hash[person] += 1;
+        }
+    })
+
+    completion.forEach((person) => {
+        hash[person] -= 1;
+    })
+
+    for (let key in hash) {
+        if (hash[key] > 0) {
+            return key;
+        }
+    }
+}
