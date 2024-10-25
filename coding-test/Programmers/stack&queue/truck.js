@@ -52,3 +52,37 @@ function solution(bridge_length, weight, truck_weights) {
 
     return time;
 }
+
+
+// 복습
+function solution(bridge_length, weight, truck_weights) {
+    let time = 0;
+    let totalWeight = 0;
+    const queue = Array(bridge_length).fill(0);
+    let index = 0;
+    const n = truck_weights.length;
+
+    while (index < n || totalWeight > 0) {
+        time++;
+
+        const popped = queue.shift();
+        if (popped !== 0) {
+            totalWeight -= popped;
+        }
+
+        if (index < n && totalWeight + truck_weights[index] <= weight) {
+            queue.push(truck_weights[index]);
+            totalWeight += truck_weights[index];
+            index++;
+        } else {
+            queue.push(0);
+        }
+    }
+
+    return time;
+}
+
+// 큐의 길이를 다리 길이만큼 만들어 놓았기에 조건에 따로 다리 길이에 관한 조건을 작성할 필요가 없음
+// 다리에서 트럭이 계속 다니는동안 현재 다리 기준으로 측정되는 무게는 다리 위에 있는 트럭 무게의 합이다.
+// 트럭이 다리에 타고, 내리는 동안 현재 다리의 무게를 계산해야 함
+// 무게 조건에 해당되지 않으면 0을 push함
