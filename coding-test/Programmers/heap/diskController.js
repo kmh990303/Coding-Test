@@ -67,65 +67,35 @@ function solution(jobs) {
 }
 
 
-// class minHeap {
-//     constructor(arr) {
-//         this.heap = [];
-//         arr.forEach((val) => this.push(val));
-//     }
-//     push(val) {
-//         this.heap.push(val);
-//         this.bubbleUp();
-//     }
-//     bubbleUp() {
-//         let idx = this.heap.length - 1;
-//         const elem = this.heap[idx];
+// 복습
 
-//         while (idx > 0) {
-//             let parentIdx = Math.floor((idx - 1) / 2);
-//             let parent = this.heap[parentIdx];
+function solution(jobs) { //작업을 힙에 넣을 때마다, 정렬이 필요하므로 힙 사용
+    jobs.sort((a, b) => a[0] - b[0]);
 
-//             if (elem >= parent) break;
+    const heap = [];
+    let time = 0;
+    let i = 0;
+    let totalTime = 0;
 
-//             this.heap[idx] = parent;
-//             idx = parentIdx;
-//         }
+    while (i < jobs.length || heap.length > 0) {
+        while (i < jobs.length && jobs[i][0] <= time) {
+            heap.push(jobs[i++]);
+            heap.sort((a, b) => a[1] - b[1]);
+        }
 
-//         this.heap[idx] = elem;
-//     }
-//     pop() {
-//         const min = this.heap[0];
-//         const last = this.heap.pop();
+        if (heap.length > 0) {
+            const [requestT, jobT] = heap.shift();
+            time += jobT;
+            totalTime += time - requestT;
+        } else {
+            time = jobs[i][0];
+        }
+    }
 
-//         if (this.heap.length > 0) {
-//             this.heap[0] = last;
-//             this.sinkDown(0);
-//         }
+    return Math.floor(totalTime / jobs.length);
+}
 
-//         return min;
-//     }
-//     sinkDown(index) {
-//         const length = this.heap.length;
-//         const elem = this.heap[index];
-
-//         while (true) {
-//             let swap = null;
-
-//             let leftChildIndex = 2 * index + 1;
-//             let rightChildIndex = 2 * index + 2;
-//             let leftChild, rightChild;
-
-//             if (leftChildIndex < length) {
-//                 leftChild = this.heap[leftChildIndex];
-//                 if (leftChild < elem) {
-//                     swap = leftChildIndex;
-//                 }
-//             }
-//             if (rightChildIndex < length) {
-//                 rightChild = this.heap[rightChildIndex];
-//                 if (rightChild < (swap === null ? elem : leftChild)) {
-//                     swap = rightChildIndex;
-//                 }
-//             }
-//         }
-//     }
-// }
+// 주어진 시간 내에 요청된 작업들을 힙에 넣고, 작업이 빨리 끝나는 순으로 정렬
+// 작업을 모두 힙에 담아야 인덱스가 범위를 초과함
+// 작업을 모두 담지 않았거나 힙에 아직 작업이 남아있으면 반복문 계속 수행
+// 힙은 비어있으나 작업을 모두 담지 않았다면 현재 인덱스가 가리키는 작업의 요청시간으로 스킵함
