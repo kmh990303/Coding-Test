@@ -30,3 +30,16 @@ function solution(brown, yellow) { //테두리는 무조건 가로 세로 2개�
 
     return answer;
 }
+
+// 복습
+
+function solution(brown, yellow) {
+    const square = brown + yellow;
+
+    for (let y = 1; y <= square; y++) {
+        for (let x = y; x <= square; x++) {
+            if ((x + 2) * (y + 2) > square) break;
+            if ((x + 2) * (y + 2) === square && (x * y === yellow)) return [x + 2, y + 2];
+        }
+    }
+}
