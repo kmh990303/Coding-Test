@@ -10,9 +10,9 @@
 
 function solution(numbers) {
     var answer = 0;
-    
+
     let numSet = new Set();
-    
+
     //소수 판별
     function isPrime(n) {
         if (n < 2) return false;
@@ -21,7 +21,7 @@ function solution(numbers) {
         }
         return true;
     }
-    
+
     // 순열 생성
     function getPermutations(arr, fixed) {
         if (arr.length > 0) {
@@ -33,15 +33,49 @@ function solution(numbers) {
             }
         }
     }
-    
+
     let nums = numbers.split('');
     getPermutations(nums, '');
-    
+
     numSet.forEach((val) => {
         if (isPrime(val) === true) {
             answer++;
         }
     })
-    
+
+    return answer;
+}
+
+// 복습
+function solution(numbers) {
+    const numSet = new Set();
+    let answer = 0;
+
+    function isPrime(num) {
+        if (num < 2) return false;
+        for (let i = 2; i < num; i++) {
+            if (num % i === 0) return false
+        }
+        return true;
+    }
+
+    function getPermutation(arr, fixed) {
+        if (arr.length > 0) {
+            for (let i = 0; i < arr.length; i++) {
+                const newFixed = fixed + arr[i];
+                const newArr = [...arr.slice(0, i), ...arr.slice(i + 1)];
+                numSet.add(+newFixed);
+                getPermutation(newArr, newFixed);
+            }
+        }
+    }
+
+    const nums = numbers.split('');
+    getPermutation(nums, '');
+
+    numSet.forEach((val) => {
+        if (isPrime(val)) answer++;
+    })
+
     return answer;
 }
