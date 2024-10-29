@@ -19,3 +19,34 @@ function solution(word) {
 
     return answer;
 }
+
+// 복습
+function solution(word) {
+    const alphaArr = ["A", "E", "I", "O", "U"];
+    let cnt = 0;
+    let result = 0;
+    let found = false;
+
+    function dfs(fixed, depth) {
+        if (found) return;
+
+        //딱 5 깊이까지만 dfs 수행
+        if (depth <= 5) {
+            for (let i = 0; i < alphaArr.length; i++) {
+                cnt++; // 사전 순서 카운트
+                const newFixed = fixed + alphaArr[i];
+                // console.log(newFixed);
+                if (newFixed === word) {
+                    result = cnt;
+                    found = true;
+                    return;
+                };
+
+                dfs(newFixed, depth + 1);
+            }
+        }
+    }
+
+    dfs('', 1);
+    return result;
+}
