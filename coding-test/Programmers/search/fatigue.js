@@ -30,3 +30,25 @@ function solution(k, dungeons) {
 
     return answer;
 }
+
+// 복습
+function solution(k, dungeons) {
+    const n = dungeons.length;
+    const visited = Array(n).fill(false);
+    const result = [];
+
+    function dfs(k, count) {
+        for (let i = 0; i < n; i++) {
+            if (!visited[i] && k >= dungeons[i][0]) { // 방문한 적 없는 던전이고, 최소 피로도 보다 크거나 같을 때 입장 가능
+                visited[i] = true;
+                dfs(k - dungeons[i][1], count + 1); // 1 대입하기
+                visited[i] = false; // 돌아왔을 때, 방문 여부 초기화
+                result.push(count);
+            }
+        }
+    }
+
+    dfs(k, 1);
+
+    return Math.max(...result);
+}
