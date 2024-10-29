@@ -87,3 +87,72 @@ class Graph {
         delete this.adjacencyList[vertex];
     }
 }
+
+
+// 복습
+function solution(n, wires) {
+    // 전선 배열 순회하며 해당 간선을 잘랐을 때, 각 정점을 BFS 시켜 정점의 개수 차를 구해 저장
+    const graph = new Graph();
+    const result = [];
+
+
+    wires.sort((a, b) => a[0] - b[0]); // 전선 정렬
+
+    wires.forEach(([v1, v2]) => {
+        graph.addVertex(v1);
+        graph.addVertex(v2);
+        graph.addEdge(v1, v2);
+    }) // 그래프 초기화
+
+
+
+    function bfs(start) {
+        const queue = [start];
+        let count = 0;
+        const visited = new Array(n + 1).fill(false);
+
+        visited[start] = true;
+
+        while (queue.length > 0) {
+            const elem = queue.shift();
+            count++;
+
+            for (let i = 0; i < graph.adjacencyList[elem].length; i++) {
+                const adjVertex = graph.adjacencyList[elem][i];
+                if (!visited[adjVertex]) {
+                    visited[adjVertex] = true;
+                    queue.push(adjVertex);
+                }
+            }
+        }
+
+        return count;
+    }
+
+    wires.forEach(([v1, v2]) => {
+        graph.removeEdge(v1, v2);
+        const cnt1 = bfs(v1);
+        const cnt2 = bfs(v2);
+        result.push(Math.abs(cnt1 - cnt2));
+        graph.addEdge(v1, v2);
+    })
+
+    return Math.min(...result);
+}
+
+class Graph {
+    constructor() {
+        this.adjacencyList = {};
+    }
+    addVertex(vertex) {
+        if (!this.adjacencyList[vertex]) this.adjacencyList[vertex] = [];
+    }
+    addEdge(v1, v2) {
+        this.adjacencyList[v1].push(v2);
+        this.adjacencyList[v2].push(v1);
+    }
+    removeEdge(v1, v2) {
+        this.adjacencyList[v1] = this.adjacencyList[v1].filter((val) => val !== v2);
+        this.adjacencyList[v2] = this.adjacencyList[v2].filter((val) => val !== v1);
+    }
+}
