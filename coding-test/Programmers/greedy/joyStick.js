@@ -19,43 +19,82 @@
 function solution(name) {
     let answer = 0;
     let length = name.length;
-    
+
     // 각 문자의 상하 조작 횟수 계산
     function nearCount(ch) {
         const aCharCode = 'A'.charCodeAt(0);
         const zCharCode = 'Z'.charCodeAt(0);
         const charCode = ch.charCodeAt(0);
-        
+
         return Math.min(charCode - aCharCode, zCharCode - charCode + 1);
     }
-    
+
     // 알파벳을 맞추는 조작 횟수 더하기
     for (let i = 0; i < length; i++) {
         answer += nearCount(name[i]);
     }
-    
+
     // 커서 이동 최적화를 위한 변수
     let minMove = length - 1; // 기본적으로 오른쪽으로만 쭉 가는 경우
-    
+
     // 커서 이동 최적화 계산
     for (let i = 0; i < length; i++) {
         let next = i + 1;
-        
+
         // 연속된 'A' 스킵
         while (next < length && name[next] === 'A') {
             next++;
         }
-        
+
         // 오른쪽으로만 이동하는 경우와 돌아가는 경우 비교
         let moveRightOnly = i; // 현재 커서까지 오른쪽으로 이동한 거리
         let moveBackAndForth = length - next; // 나머지 문자열을 돌아서 처리할 거리
         let totalMove = moveRightOnly + moveBackAndForth + Math.min(i, moveBackAndForth);
-        
+
         minMove = Math.min(minMove, totalMove);
     }
-    
+
     // 총 조작 횟수는 알파벳 변경 횟수 + 커서 이동 횟수
     answer += minMove;
-    
+
+    return answer;
+}
+
+
+// 복습
+function solution(name) { // 문자열.charCodeAt(0) 하면 0 인덱스의 문자에 대한 아스키코드 반환
+    let answer = 0;
+    const length = name.length;
+
+    function nearCount(ch) {
+        const aCharCode = 'A'.charCodeAt(0);
+        const zCharCode = 'Z'.charCodeAt(0);
+        const charCode = ch.charCodeAt(0);
+
+        return Math.min(charCode - aCharCode, zCharCode - charCode + 1);
+    }
+
+    for (let i = 0; i < length; i++) {
+        answer += nearCount(name[i]);
+    }
+
+    let minMove = length - 1;
+
+    for (let i = 0; i < length; i++) {
+        let next = i + 1;
+
+        while (next < length && name[next] === 'A') {
+            next++;
+        }
+
+        const moveRightOnly = i;
+        const moveBachAndForth = length - next;
+        const totalMove = moveRightOnly + moveBachAndForth + Math.min(moveRightOnly, moveBachAndForth);
+
+        minMove = Math.min(minMove, totalMove);
+    }
+
+    answer += minMove;
+
     return answer;
 }
