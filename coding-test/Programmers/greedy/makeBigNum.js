@@ -37,3 +37,35 @@ function solution(number, k) {
 
     return answer;
 }
+
+//복습 => 순열 개념을 이용해 구현해봤는데, 시간 복잡도에서 걸림...
+function solution(number, k) { // 순열 구한 다음, 가장 큰 숫자 문자열로 출력
+    const n = number.length;
+    const pickN = n - k; //  몇 개의 숫자를 골라 만들어야 하는지 저장
+    const numSet = new Set();
+    const result = [];
+
+    const arr = number.split('');
+
+    function getPermutation(arr, fixed) {
+        if (fixed.length >= pickN) return;
+
+        if (arr.length > 0) {
+            for (let i = 0; i < arr.length; i++) {
+                const newFixed = fixed + arr[i];
+                const newArr = [...arr.slice(i + 1)];
+                numSet.add(+newFixed);
+                getPermutation(newArr, newFixed);
+            }
+        }
+    }
+
+    getPermutation(arr, '');
+
+    numSet.forEach((val) => {
+        result.push(val);
+    })
+
+    const maxStr = String(Math.max(...result));
+    return maxStr;
+}
