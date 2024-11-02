@@ -51,3 +51,45 @@ function solution(n, costs) {
 
     return totalCost;
 }
+
+//복습 => 크루스칼 알고리즘 노션에 정리
+function find(parent, x) {
+    if (parent[x] !== x) {
+        parent[x] = find(parent, parent[x]);
+    }
+    return parent[x];
+}
+
+function union(parent, a, b) {
+    const rootA = find(parent, a);
+    const rootB = find(parent, b);
+
+    if (rootA < rootB) {
+        parent[rootB] = rootA;
+    } else {
+        parent[rootA] = rootB;
+    }
+}
+
+function solution(n, costs) {
+    costs.sort((a, b) => a[2] - b[2]);
+
+    const parent = Array.from({ length: n }, (_, i) => i);
+
+    let totalCost = 0;
+    let edgeCount = 0;
+
+    for (let i = 0; i < costs.length; i++) {
+        const [a, b, cost] = costs[i];
+
+        if (find(parent, a) !== find(parent, b)) {
+            union(parent, a, b);
+            totalCost += cost;
+            edgeCount++;
+        }
+
+        if (edgeCount === n - 1) break;
+    }
+
+    return totalCost;
+}
