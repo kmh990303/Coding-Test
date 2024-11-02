@@ -13,16 +13,33 @@
 function solution(routes) {
     let answer = 0;
     let camera = -30001;
-    
+
     routes.sort((a, b) => a[1] - b[1]);
     console.log(routes);
-    
+
     for (let i = 0; i < routes.length; i++) { //카메라가 기준 값
         if (camera < routes[i][0]) {
             camera = routes[i][1];
             answer++;
         }
     }
-    
+
+    return answer;
+}
+
+// 복습 => 진출시점으로 오름차순 정렬 => 카메라시점보다 진입시점이 더 크면 카메라를 진출시점으로 갱신 후 카메라 수 증가시킴
+function solution(routes) {
+    let answer = 0;
+    let camera = -30001;
+
+    routes.sort((a, b) => a[1] - b[1]);
+
+    for (let i = 0; i < routes.length; i++) {
+        if (camera < routes[i][0]) {
+            camera = routes[i][1];
+            answer++;
+        }
+    }
+
     return answer;
 }
