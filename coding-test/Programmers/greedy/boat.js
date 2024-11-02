@@ -37,7 +37,7 @@ function solution(people, limit) {
 function solution(people, limit) {
     people.sort((a, b) => a - b);
     let i;
-    
+
     for (i = 0, j = people.length - 1; i < j; j--) {
         if (people[i] + people[j] <= limit) {
             i++;
@@ -45,3 +45,19 @@ function solution(people, limit) {
     }
     return people.length - i;
 }
+
+
+// 복습
+function solution(people, limit) {
+    people.sort((a, b) => a - b);
+    let i, j;
+    for (i = 0, j = people.length - 1; i < j; j--) {
+        if (people[i] + people[j] <= limit) {
+            i++;
+        }
+    }
+
+    return people.length - i;
+} // 인덱스 i 외에 j를 따로 두어서 i가 j를 넘어가지 못하게 하며, j는 - 증감식 사용;
+// 무거운 무게는 혼자 보트를 타는 것이 j를 -시키는 것과 동일한 의미
+// 같이 태울 수 있는 것은 i++를 의미해 총 보트 수는 사람 명수에서 i를 뺀 것과 동일
