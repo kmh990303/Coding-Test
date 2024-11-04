@@ -72,3 +72,62 @@ class Graph {
         return losers;
     }
 }
+
+
+// 복습
+function solution(n, results) {
+    let answer = 0;
+    const graph = new Graph();
+
+    results.forEach(([winVertex, loseVertex]) => {
+        graph.addVertex(winVertex);
+        graph.addVertex(loseVertex);
+        graph.addEdge(winVertex, loseVertex);
+    });
+
+    for (let i = 1; i <= n; i++) {
+        if (graph.isMakeRank(i, n)) answer++;
+    }
+
+    return answer;
+}
+
+class Graph {
+    constructor() {
+        this.adjacencyWinList = {}; // 각 정점이 이긴 번호를 저장
+        this.adjacencyLoseList = {}; // 각 정점이 진 번호를 저장
+    }
+    addVertex(v) {
+        if (!this.adjacencyWinList[v]) this.adjacencyWinList[v] = [];
+        if (!this.adjacencyLoseList[v]) this.adjacencyLoseList[v] = [];
+    }
+    addEdge(v1, v2) {
+        this.adjacencyWinList[v1].push(v2);
+        this.adjacencyLoseList[v2].push(v1);
+    }
+    isMakeRank(v, n) {
+        const winLength = this.bfs(v, this.adjacencyWinList);
+        const loseLength = this.bfs(v, this.adjacencyLoseList);
+
+        return n - 1 === winLength + loseLength;
+    }
+    bfs(start, adjacencyList) {
+        const queue = [start];
+        const visited = new Set();
+
+        visited.add(start);
+
+        while (queue.length > 0) {
+            const player = queue.shift();
+
+            for (let opponent of adjacencyList[player] || []) {
+                if (!visited.has(opponent)) {
+                    visited.add(opponent);
+                    queue.push(opponent);
+                }
+            }
+        }
+
+        return visited.size - 1;
+    }
+}
