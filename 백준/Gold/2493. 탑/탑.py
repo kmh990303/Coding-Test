@@ -1,4 +1,5 @@
 import sys
+
 input = sys.stdin.readline
 
 n = int(input())
@@ -16,4 +17,4 @@ for i in range(n):
 
     stack.append((i, tower[i]))
 
-print(" ".join(map(str, result)))
+print(' '.join(map(str, result)))
