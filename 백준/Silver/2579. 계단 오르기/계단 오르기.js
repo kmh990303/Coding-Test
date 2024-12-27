@@ -19,17 +19,16 @@ rl.on('line', (line) => {
 
     const dp = new Array(n).fill(0);
 
-    // 초기값 설정
     dp[0] = numberList[0];
     dp[1] = numberList[0] + numberList[1];
     dp[2] = Math.max(numberList[0] + numberList[2], numberList[1] + numberList[2]);
 
     for (let i = 3; i < n; i++) {
         dp[i] = Math.max(
-            dp[i - 2] + numberList[i], // 두 칸 전에서 오는 경우
-            dp[i - 3] + numberList[i - 1] + numberList[i] // 한 칸 전에서 오는 경우
+            dp[i - 2] + numberList[i],
+            dp[i - 3] + numberList[i - 1] + numberList[i],
         );
     }
 
     console.log(dp[n - 1]);
-});
+})
