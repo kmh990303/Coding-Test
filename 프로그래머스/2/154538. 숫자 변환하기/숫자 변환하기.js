@@ -1,5 +1,4 @@
 function solution(x, y, n) {
-    const queue = [[x, 0]];
     const dp = Array(y + 1).fill(Infinity);
     dp[x] = 0;
     
@@ -9,5 +8,5 @@ function solution(x, y, n) {
         dp[i * 3] = Math.min(dp[i * 3], dp[i] + 1);
     }
     
-    return dp[y] === Infinity ? -1 : dp[y];
+    return dp[y] !== Infinity ? dp[y] : -1;
 }
