@@ -9,14 +9,14 @@ const input = [];
 rl.on('line', (line) => {
     input.push(line);
 }).on('close', () => {
-    const [n, r, c] = input[0].split(' ').map(Number); 
+    const [n, r, c] = input[0].split(' ').map(Number);
 
     function z_order(n, r, c) {
         let result = 0;
 
         while (n > 0) {
-            const size = 2 ** (n - 1);
-            const area = size * size;
+            let size = 2 ** (n - 1);
+            let area = size * size;
 
             if (r < size && c < size) {}
             else if (r < size && c >= size) {
