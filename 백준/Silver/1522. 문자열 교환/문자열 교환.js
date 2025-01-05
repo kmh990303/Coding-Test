@@ -10,9 +10,8 @@ rl.on('line', (line) => {
     input.push(line);
 }).on('close', () => {
     let arr = input[0].trim().split('');
-    const aCnt = arr.filter((val) => val === 'a').length;
+    const aCnt = arr.filter(val => val === 'a').length;
     arr = arr.concat(arr.slice(0, aCnt - 1));
-    
     let result = Infinity;
 
     for (let i = 0; i < arr.length - (aCnt - 1); i++) {
