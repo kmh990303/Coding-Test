@@ -13,7 +13,6 @@ rl.on('line', (line) => {
     const arr = input[1].split(' ').map(Number).sort((a, b) => a - b);
     const result = [];
     const path = [];
-    const maxN = Math.max(...arr);
     const visited = Array(n).fill(false);
 
     function dfs(depth) {
