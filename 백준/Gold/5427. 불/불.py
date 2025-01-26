@@ -1,10 +1,7 @@
 from collections import deque
-import sys
-
-input = sys.stdin.readline
 
 di = [-1, 0, 1, 0]
-dj = [0, 1, 0, -1] # 북동남서
+dj = [0, 1, 0, -1]
 
 def bfs(len_i, len_j, board, fires, start):
     fire_queue = deque(fires)
@@ -18,9 +15,9 @@ def bfs(len_i, len_j, board, fires, start):
     si, sj = start
     person_visited[si][sj] = True
 
-    while person_queue:
-        fire_size = len(fire_queue)
-        for _ in range(fire_size):
+    while person_queue: # 사람 위치가 담겨 있을 때
+        fire_size = len(fire_queue) # 매초마다 불을 먼저 이동시키고 이후에 사람 이동 구현
+        for _ in range(fire_size): # queue의 요소가 추가되더라도 처음 길이는 변하지 않음
             fi, fj = fire_queue.popleft()
             for k in range(4):
                 nfi, nfj = fi + di[k], fj + dj[k]
@@ -28,7 +25,6 @@ def bfs(len_i, len_j, board, fires, start):
                     if not fire_visited[nfi][nfj] and board[nfi][nfj] == '.':
                         fire_visited[nfi][nfj] = True
                         fire_queue.append((nfi, nfj))
-        # 사람 이동
         person_size = len(person_queue)
         for _ in range(person_size):
             pi, pj, dist = person_queue.popleft()
@@ -43,10 +39,12 @@ def bfs(len_i, len_j, board, fires, start):
                         if not fire_visited[npi][npj]:
                             person_visited[npi][npj] = True
                             person_queue.append((npi, npj, dist + 1))
-    return 'IMPOSSIBLE'
+    return "IMPOSSIBLE"
+
 
 # 입력
 t = int(input())
+
 for _ in range(t):
     len_j, len_i = map(int, input().split())
     board = [list(input().strip()) for _ in range(len_i)]
