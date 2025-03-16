@@ -1,30 +1,28 @@
-# 1700번 멀티탭 스케줄링
-
 n, k = map(int, input().split())
-use = list(map(int, input().split()))
+uses = list(map(int, input().split()))
 
-answer = 0
 plug = []
+answer = 0
 
 for idx in range(k):
-    if use[idx] in plug:
+    if uses[idx] in plug:
         continue
-        
+
     if len(plug) != n:
-        plug.append(use[idx])
+        plug.append(uses[idx])
         continue
-    
+
     priority = []
-    
-    for p in plug:
-        if p in use[idx:]:
-            priority.append(use[idx:].index(p))
+
+    for elem in plug:
+        if elem in uses[idx:]:
+            priority.append(uses[idx:].index(elem))
         else:
             priority.append(101)
-    
+
     target = priority.index(max(priority))
     plug.remove(plug[target])
-    plug.append(use[idx])
+    plug.append(uses[idx])
     answer += 1
 
 print(answer)
